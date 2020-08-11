@@ -8,6 +8,9 @@
         "package-look.json": true,
         "yarn.lock": true,
         "public": true,
-        "README.md": true
+        "README.md": true,
+        "tsconfig.json": true,
+        "src/react-app-env.d.ts": true,
+        "src/index.tsx": true
     }
 }

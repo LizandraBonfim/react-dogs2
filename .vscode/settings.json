@@ -11,6 +11,10 @@
         "README.md": true,
         "tsconfig.json": true,
         "src/react-app-env.d.ts": true,
-        "src/index.tsx": true
+        "src/index.tsx": true,
+        ".editorconfig": true,
+        ".eslintignore": true,
+        ".eslintrc.json": true,
+        "prettier.config.js": true,
     }
 }

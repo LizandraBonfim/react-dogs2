@@ -48,17 +48,17 @@ const EstiloGlobal = createGlobalStyle`
 
 //#region [ Animações ]
 
-const animacaoDaEsquerda = keyframes`
+const animeLeftFrame = keyframes`
     to {
         opacity: 1;
         transform: initial;
     }
 `;
 
-const AnimeDaEsquerda = styled.div`
+const AnimeLeft = styled.div`
   opacity: 0;
   transform: translateX(-20px);
-  animation: ${animacaoDaEsquerda} 0.3s forwards;
+  animation: ${animeLeftFrame} 0.3s forwards;
 `;
 
 const skeleton = keyframes`
@@ -98,6 +98,7 @@ const Titulo = styled.h1`
        content: '';
        display: block;
        width: 1.5rem;
+       height: 1.5rem;
        background: #fb1;
        position: absolute;
        bottom: 5px;
@@ -120,7 +121,7 @@ const AppBody = styled.main`
 
 export { 
     EstiloGlobal, 
-    AnimeDaEsquerda, 
+    AnimeLeft, 
     Container, 
     MainContainer, 
     Carregando,

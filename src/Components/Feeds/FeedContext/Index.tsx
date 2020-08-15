@@ -26,6 +26,8 @@ export const ModalFeedPhoto: React.FC = ({ children }) => {
   const [photo, setPhoto] = useState<Photo | undefined>();
   const [userId, setUserId] = useState<string | undefined>();
 
+  
+
   return (
     <PhotoContext.Provider
       value={{

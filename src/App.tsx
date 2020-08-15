@@ -5,19 +5,24 @@ import Header from "./Components/Header/Index";
 import Home from "./Components/Home/Index";
 import Footer from "./Components/Footer/Index";
 import NotFound from "./Components/NotFound/Index";
+import { UserStorage } from "./Components/UserContext/Index";
+import Login from "./Components/Login/Index";
 
 const App: React.FC = () => {
   return (
     <AppDogs>
       <BrowserRouter>
-        <Header />
-        <AppBody>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="*" element={ <NotFound /> } />
-          </Routes>
-        </AppBody>
-        <Footer />
+        <UserStorage>
+          <Header />
+          <AppBody>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login/*" element={<Login />} />
+              <Route path="*" element={ <NotFound /> } />
+            </Routes>
+          </AppBody>
+          <Footer />
+        </UserStorage>
       </BrowserRouter>
     </AppDogs>
   );

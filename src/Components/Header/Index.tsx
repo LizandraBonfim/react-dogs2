@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Container } from "../../global";
 import { Root } from "./styles";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as Dogs } from "../../Assets/dogs.svg";
+import { UserContext } from "../UserContext/Index";
 
 const Header: React.FC = () => {
-  const logado = false;
+
+  const { usuario } = useContext(UserContext);
+
+  console.log('usuairo', usuario)
+  
 
   return (
     <Root>
@@ -17,15 +22,15 @@ const Header: React.FC = () => {
             <Dogs />
           </Link>
           
-          {!!!logado && (
+          {!!!usuario && (
             <Link className="login" to="/login">
               Login / Criar
             </Link>
           )}
 
-          {logado && (
+          {usuario && (
             <Link className="login" to="/conta">
-              Werter
+              {usuario.nomeDeUsuario}
             </Link>
           )}
         </nav>

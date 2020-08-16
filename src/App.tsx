@@ -7,6 +7,8 @@ import Footer from "./Components/Footer/Index";
 import NotFound from "./Components/NotFound/Index";
 import { UserStorage } from "./Components/UserContext/Index";
 import Login from "./Components/Login/Index";
+import ProtectedRouter from "./Shared/ProtectedRouter";
+import User from "./Components/User/User";
 
 const App: React.FC = () => {
   return (
@@ -18,7 +20,8 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login/*" element={<Login />} />
-              <Route path="*" element={ <NotFound /> } />
+              <ProtectedRouter path="conta/*" element={ <User /> } />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </AppBody>
           <Footer />

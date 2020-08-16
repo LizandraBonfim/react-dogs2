@@ -23,9 +23,7 @@ const getTokenFromLocalStorage = (): string | null => {
 
 }
 
-const storageTokenLocal = (token: string | undefined): void => {
-
-    debugger;
+const storageTokenLocal = (token: string | undefined): void => {    
 
     if (!!!token)
         return;

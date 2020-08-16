@@ -16,6 +16,7 @@
         ".eslintignore": true,
         ".eslintrc.json": true,
         "prettier.config.js": true,
-        "src/Assets": true
+        "src/Assets": true,
+        "yarn-error.log": true
     }
 }

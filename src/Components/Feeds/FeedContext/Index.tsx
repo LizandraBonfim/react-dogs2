@@ -9,35 +9,35 @@ interface Photo {
   id: string;
 }
 
-interface PhotoContextData {
-  photo: Photo | undefined;
-  setPhoto: Dispatch<SetStateAction<Photo | undefined>>;
-  userId: string | undefined;
-  setUserId: Dispatch<SetStateAction<string | undefined>>
+interface ModalFeedContextData {
+  photoModal: Photo | undefined;
+  setPhotoModal: Dispatch<SetStateAction<Photo | undefined>>;
+  userModalId: string | undefined;
+  setUserModalId: Dispatch<SetStateAction<string>>
 
 }
 
-export const PhotoContext = createContext<PhotoContextData>(
-  {} as PhotoContextData,
+export const ModalFeedContext = createContext<ModalFeedContextData>(
+  {} as ModalFeedContextData,
 );
 
 export const ModalFeedPhoto: React.FC = ({ children }) => {
   
-  const [photo, setPhoto] = useState<Photo | undefined>();
-  const [userId, setUserId] = useState<string | undefined>();
+  const [photoModal, setPhotoModal] = useState<Photo | undefined>();
+  const [userModalId, setUserModalId] = useState<string>("");
 
   
 
   return (
-    <PhotoContext.Provider
+    <ModalFeedContext.Provider
       value={{
-        photo,
-        setPhoto,
-        userId,
-        setUserId
+        photoModal,
+        setPhotoModal,
+        userModalId,
+        setUserModalId
       }}
     >
       {children}
-    </PhotoContext.Provider>
+    </ModalFeedContext.Provider>
   );
 };

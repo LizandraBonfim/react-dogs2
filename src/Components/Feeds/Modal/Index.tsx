@@ -1,11 +1,11 @@
 import React, { MouseEvent, useContext } from "react";
 
 import { Container } from "./styles";
-import { PhotoContext } from "../FeedContext/Index";
+import { ModalFeedContext } from "../FeedContext/Index";
 
 const Modal: React.FC = () => {
 
-    const { setPhoto } = useContext(PhotoContext);
+    const { setPhotoModal } = useContext(ModalFeedContext);
 
     
     function handleOutsideClick(event: MouseEvent<HTMLDivElement, globalThis.MouseEvent> | undefined) {        
@@ -13,7 +13,7 @@ const Modal: React.FC = () => {
         console.log('clicou');
 
         if (event?.target === event?.currentTarget){
-            setPhoto(undefined);
+            setPhotoModal(undefined);
         }
 
         

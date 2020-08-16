@@ -19,3 +19,20 @@ export interface Usuario {
     nomeDeUsuario: string;
     fotos: Foto[];
 }
+
+export interface ResponseApi<T> {
+	sucesso:  boolean;
+    mensagem: string;	
+	erros:    null;
+    dados:    T;
+
+}
+
+export interface ResponseBase {
+    sucesso:  boolean;
+    mensagem: string;
+	loading: boolean;
+	erro:    any;
+    
+}
+

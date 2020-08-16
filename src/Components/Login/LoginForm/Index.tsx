@@ -9,56 +9,40 @@ import Input from '../../Forms/Input/Index';
 import Button from '../../Forms/Button/Index';
 import useLogin from '../../../Hooks/useLogin';
 
-
 const LoginForm: React.FC = () => {
+    const { sucesso, loading, erro, efetuarLogin } = useLogin();
+    const navigate = useNavigate();
 
+    async function handlerSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
+        event.preventDefault();
 
-	const { sucesso, loading, erro, efetuarLogin } = useLogin();
-	const navigate = useNavigate();
-	
+        await efetuarLogin({
+            login: 'fulano joe',
+            senha: 'fulano',
+        });
+    }
 
-	async function handlerSubmit(event: React.FormEvent<HTMLFormElement>) {
+    useEffect(() => {
+        if (!sucesso) return;
+        navigate('/');
+    }, [sucesso, navigate]);
 
-		event.preventDefault();
+    return (
+      <AnimeLeft>
+          <Head title="Login" description="Tela de login" />
+          <Titulo>Login</Titulo>
+          <Form onSubmit={handlerSubmit}>
+              <Input label="Login / Email" nome="login" type="text" erro="" />
+              <Input label="Senha" nome="senha" type="password" erro="" />
 
-		efetuarLogin({
-			login: 'fulano joe',
-			senha: 'fulano'
-		});
+              {loading && <Button disabled>Aguarde...</Button>}
 
-	}
+              {!loading && <Button>Entrar</Button>}
 
-	useEffect(() => {
-
-		if (!sucesso)
-			return;
-		
-		navigate('/conta');
-		
-
-
-
-	}, [sucesso, navigate]);
-
-	return <AnimeLeft>
-		<Head title="Login" description="Tela de login" />
-		<Titulo>Login</Titulo>
-		<Form onSubmit={handlerSubmit} >
-
-			<Input label="Login / Email" nome="login" type="text" onBlur={() => { }} onChange={() => { }} erro="" />
-			<Input label="Senha" nome="senha" type="password" onBlur={() => { }} onChange={() => { }} erro="" />
-
-			{loading && <Button disabled>Aguarde...</Button>}
-
-			{!loading && <Button>Entrar</Button>}
-
-			{erro && <p>{erro}</p>}
-
-
-
-		</Form>
-
-	</AnimeLeft>
-}
+              {erro && <p>{erro}</p>}
+            </Form>
+        </AnimeLeft>
+    );
+};
 
 export default LoginForm;

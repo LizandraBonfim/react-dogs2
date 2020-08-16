@@ -1,7 +1,7 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import { Container, Forms } from './styles';
-import { Routes, Route } from 'react-router-dom';
 import LoginForm from './LoginForm/Index';
 
 const Login: React.FC = () => {
@@ -11,7 +11,7 @@ const Login: React.FC = () => {
         <Routes>
           <Route path="/" element={<LoginForm />} />
         </Routes>
-      </Forms>      
+      </Forms>
     </Container>
   )
 }

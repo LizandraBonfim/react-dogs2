@@ -26,19 +26,26 @@ interface Response {
 }
 
 function useLogin(): Response {
-  const { data, erro, setErro, loading, setLoading, post } = useApi<
-    LoginResponse
-  >();
+
+  const {
+    data,
+    erro,
+    setErro,
+    loading,
+    setLoading,
+    post } = useApi<LoginResponse>();
+
   const [sucesso, setSucesso] = useState<boolean>(false);
   const { setUsuario } = useContext(UserContext);
 
-  const efetuarLogin = useCallback(
-    async (login: Login) => {
+  const efetuarLogin = useCallback( async (login: Login) => {
+
       setLoading(true);
 
       await post("token/auth", login);
 
       setSucesso(true);
+      
     },
     [post, setLoading]
   );
@@ -50,7 +57,9 @@ function useLogin(): Response {
     storageTokenLocal(data?.tokenDeAcesso);
     setUsuario(data?.usuario);
     storeUser(data?.usuario);
-  }, [sucesso, data]);
+
+  },
+    [sucesso, data, setUsuario]);
 
   return {
     sucesso,

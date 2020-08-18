@@ -9,9 +9,7 @@ import { UserContext } from "../UserContext/Index";
 
 const Header: React.FC = () => {
 
-  const { usuario } = useContext(UserContext);
-
-  console.log('usuairo', usuario)
+  const { usuario } = useContext(UserContext);  
   
 
   return (

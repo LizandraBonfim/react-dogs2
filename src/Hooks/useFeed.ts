@@ -1,38 +1,42 @@
 import React, { useState, useCallback, useContext, useEffect } from 'react';
-import { ResponseBase, Foto, ResponseApi } from '../models/Index';
+import { ResponseBase, Foto, ResponseApi, Usuario } from '../models/Index';
 import useApi from './useApi';
 
-interface FeedResponse extends ResponseApi<Foto[]> {
+interface FeedResponse extends ResponseApi<Usuario[]> {
     id: string;
     nomeDeUsuario: string;
 }
 
 interface Response extends ResponseBase {
 
-    fotos: Foto[];
-    buscarFeed: (usuarioId: string) => Promise<any>;
+    feeds: Usuario[];
+    buscarFeed: (usuarioId: string | undefined) => Promise<any>;
 
 }
 
 
-function useFeed(): Response {
+function useFeed( usuarioId: string | undefined ): Response {
 
-    const { data, erro, loading, post } = useApi<FeedResponse>();
+    const { data, erro, loading, get } = useApi<FeedResponse>();
     const [sucesso, setSucesso] = useState<boolean>(false);
 
-    const buscarFeed = useCallback(async (usuarioId: string) => {
+    const buscarFeed = useCallback(async () => {
+        
+        await get('feed', usuarioId);
 
-
-
-    }, []);
+    }, [ get, usuarioId ]);
 
     return {
 
-        
-        erro
+        mensagem: '',
+        loading,
+        feeds: data.dados,
+        erro,
         sucesso,
         buscarFeed
 
     }
 
 }
+
+export default useFeed;

@@ -1,10 +1,8 @@
 import { useState, useCallback, Dispatch, SetStateAction, useMemo } from "react";
 import api from "../services/api";
 import { AxiosResponse, AxiosRequestConfig } from "axios";
-import { getTokenFromLocalStorage } from "../Shared/Helpers";
-import { debug } from "console";
-import { url } from "inspector";
-import { config } from "process";
+
+
 
 interface Result<T> {
 	erro: string | undefined,
@@ -46,7 +44,7 @@ function useApi<T>(): Result<T> {
 				// tipar esse erro com tipo Error do axios
 				// se for 404 remover o toke da local storage
 				// e redirecionar para login ou feed normal
-				
+
 				console.log('error ssss', error);
 
 				debugger;

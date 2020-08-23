@@ -23,6 +23,8 @@ interface Response {
   erro: string | undefined;
   loading: boolean | undefined;
   efetuarLogin: (login: Login) => Promise<any>;
+  verifyAuth: () => Promise<boolean>;
+  isAuthenticate: boolean
 }
 
 function useLogin(): Response {
@@ -32,23 +34,55 @@ function useLogin(): Response {
     erro,
     setErro,
     loading,
+    get,
     setLoading,
     post } = useApi<LoginResponse>();
 
   const [sucesso, setSucesso] = useState<boolean>(false);
   const { setUsuario } = useContext(UserContext);
+  const [ isAuthenticate, setIsAuthenticate] = useState<boolean>(true);
 
-  const efetuarLogin = useCallback( async (login: Login) => {
+  const efetuarLogin = useCallback(async (login: Login) => {
+
+    setLoading(true);
+
+    await post("token/auth", login);
+
+    setSucesso(true);
+
+  }, [post, setLoading]
+  );
+
+
+
+  const verifyAuth = useCallback(async (): Promise<boolean> => {
+
+    try {
 
       setLoading(true);
-
-      await post("token/auth", login);
-
-      setSucesso(true);
+      await get('token/verify-token', null);
+      setIsAuthenticate(true);
       
-    },
-    [post, setLoading]
-  );
+
+      return Promise.resolve(true);
+
+    } catch (error) {
+
+      const text = 'erro ao tentar verificar o token é valido';            
+      setErro(text);
+      setIsAuthenticate(false);
+      return Promise.reject(false);
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
+
+
+
+  }, [get, setLoading, setErro]);
 
   useEffect(() => {
     if (!sucesso) return;
@@ -66,6 +100,8 @@ function useLogin(): Response {
     loading,
     erro,
     efetuarLogin,
+    verifyAuth,
+    isAuthenticate
   };
 }
 

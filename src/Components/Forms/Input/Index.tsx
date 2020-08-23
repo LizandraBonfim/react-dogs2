@@ -6,16 +6,17 @@ interface InputProps {
     nome: string;
     label: string;
     type: string;
+    value: any;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
     erro?: string;
 }
 
-const Input: React.FC<InputProps> = ({ nome, label, type, onChange, onBlur, erro }) => {
+const Input: React.FC<InputProps> = ({ nome, label, type, onChange, onBlur, value, erro, ...rest }) => {
     return (
         <Container>
             <label htmlFor={nome}>{label}</label>
-            <input id={nome} name={nome} type={type} onChange={onChange} onBlur={onBlur} />
+            <input id={nome} name={nome} type={type} value={value} onChange={onChange} onBlur={onBlur} {...rest}/>
             {erro && <Error>{erro}</Error>}
         </Container>
     );

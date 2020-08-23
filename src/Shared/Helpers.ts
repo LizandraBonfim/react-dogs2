@@ -34,11 +34,11 @@ const storageTokenLocal = (token: string | undefined): void => {
 }
 
 const storeUser = (usuario: Usuario | undefined): void => {
-    console.log("usuario 1", usuario)
-    const json = JSON.stringify(usuario);
-    console.log('usuario json', json)
+    
+    const json = JSON.stringify(usuario);    
     window.localStorage.setItem(Constants.USER, json);
 }
+
 
 const getUserStored = (): Usuario => {
 
@@ -50,10 +50,16 @@ const getUserStored = (): Usuario => {
     return user as Usuario;
 }
 
+const removeItemsLocalStorage = (): void => {
+
+    window.localStorage.clear();
+}
+
 export {
     getUserIdByToken,
     storageTokenLocal,
     getTokenFromLocalStorage,
     storeUser,
-    getUserStored
+    getUserStored,
+    removeItemsLocalStorage
 };

@@ -2,7 +2,9 @@ import React, { createContext, useState, Dispatch, SetStateAction, useEffect } f
 import { useNavigate } from 'react-router-dom';
 
 import { Usuario } from '../../models/Index';
-import { getUserIdByToken, getUserStored } from '../../Shared/Helpers';
+import { getUserIdByToken, getUserStored, storageTokenLocal, removeItemsLocalStorage } from '../../Shared/Helpers';
+import useLogin from '../../Hooks/useLogin';
+import useFeed from '../../Hooks/useFeed';
 
 
 
@@ -15,22 +17,45 @@ export const UserContext = createContext<UsuarioContextData>({} as UsuarioContex
 
 export const UserStorage: React.FC = ({ children }) => {
 
-    const [usuario, setUsuario] = useState<Usuario | undefined>();
+    const [usuario, setUsuario] = useState<Usuario | undefined>();   
     const navigate = useNavigate();
+    const { verifyAuth, isAuthenticate } = useLogin();
 
-    useEffect(() => {        
+    useEffect(() => {
 
-        const usuarioId = getUserIdByToken();
-        if (!!!usuarioId)
-            return;
+        async function verifyUser() {
 
-        const user = getUserStored();
-        setUsuario(user);
+            const usuarioId = getUserIdByToken();
+            if (!!!usuarioId)
+                return;
 
-        navigate('/conta');
+            await verifyAuth();
+
+            const user = getUserStored();
+            setUsuario(user);
+            navigate('/');
+
+        }
+
+        verifyUser();
 
 
-    }, [navigate]);
+    }, [navigate, verifyAuth]);
+
+
+    function logout() {
+
+        removeItemsLocalStorage();
+        setUsuario(undefined);
+    }
+
+
+    useEffect(() => {
+        
+        if (!isAuthenticate)
+            logout();
+
+    }, [isAuthenticate]);
 
     return (
         <UserContext.Provider value={{

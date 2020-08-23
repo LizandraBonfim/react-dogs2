@@ -8,7 +8,7 @@ const Home: React.FC = () => {
   return (
     <MainContainer>
       <Head 
-          title="Fotos"
+          title="Feed"
           description="Home do site Dogs, com feed de fotos."
       />        
       <Feed />

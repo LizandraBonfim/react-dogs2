@@ -5,6 +5,9 @@ import { ModalFeedPhoto, ModalFeedContext } from "../FeedContext/Index";
 import { Usuario } from "../../../models/Index";
 import { UserContext } from "../../UserContext/Index";
 import useFeed from "../../../Hooks/useFeed";
+import FeedPhotos from "../FeedPhotos/Index";
+
+
 
 interface FeedProps {
   usuarioId?: string;
@@ -12,11 +15,10 @@ interface FeedProps {
 
 const Feed: React.FC<FeedProps> = ({ usuarioId }) => {
 
+  
+
   const { photoModal, setUserModalId } = useContext(ModalFeedContext);
-
-
   const [openModal, setOpenModal] = useState(false);
-  const [fakeFeed, setFakeFeed] = useState<Usuario[] | null>([]);
   const { buscarFeed, loading, erro, feeds, mensagem, sucesso } = useFeed(usuarioId);
 
 
@@ -32,24 +34,30 @@ const Feed: React.FC<FeedProps> = ({ usuarioId }) => {
   useEffect(() => {
 
     async function listarFeeds() {
-      
-      await buscarFeed(usuarioId);
+
+      console.log('buscando feed', usuarioId)
+      await buscarFeed(undefined);
 
     }
 
     listarFeeds();
-    
 
-  }, [usuarioId]);
+
+  }, [usuarioId, buscarFeed]);
+
+  if (erro) return null;
 
   return (
     <Container>
       <ModalFeedPhoto>
         {openModal && <p>Modal foi aberta</p>}
 
-        {fakeFeed && fakeFeed.map((x, index) => <p key={x.id}> {x.nome} </p>)}
+        {feeds && feeds.map((usuario, index) => (
 
-        <p>lista de feed fotos (ul) fica aqui</p>
+          <FeedPhotos key={index} usuario={usuario} />
+
+        ))}
+        
       </ModalFeedPhoto>
     </Container>
   );

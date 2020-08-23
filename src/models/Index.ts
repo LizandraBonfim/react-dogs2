@@ -5,12 +5,14 @@ export interface Comentario {
 	texto: string;
 }
 export interface Foto {
-	id: string;
-	nome: string;
-	idade: number;
-	peso: number;
-	src: string;
-	comentarios: Comentario[];
+	id:          string;
+    nome:        string;
+    idade:       number;
+    peso:        number;
+    qtdAcessos:  number;
+    comentarios: Comentario[];
+    extencao:    string;
+    src:         string;
 }
 
 export interface Usuario {
@@ -29,7 +31,7 @@ export interface ResponseApi<T> {
 }
 
 export interface ResponseBase {
-    sucesso:  boolean;
+    sucesso?:  boolean;
     mensagem: string;
 	loading: boolean;
 	erro:    any;

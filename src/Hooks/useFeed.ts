@@ -15,16 +15,15 @@ interface Response extends ResponseBase {
 }
 
 
-function useFeed( usuarioId: string | undefined ): Response {
+function useFeed(usuarioId: string | undefined): Response {
 
     const { data, erro, loading, get } = useApi<FeedResponse>();
-    const [sucesso, setSucesso] = useState<boolean>(false);
 
-    const buscarFeed = useCallback(async () => {
-        
+    const buscarFeed = useCallback(async (usuarioId: string | undefined = undefined) => {
+
         await get('feed', usuarioId);
 
-    }, [ get, usuarioId ]);
+    }, [get]);
 
     return {
 
@@ -32,7 +31,6 @@ function useFeed( usuarioId: string | undefined ): Response {
         loading,
         feeds: data.dados,
         erro,
-        sucesso,
         buscarFeed
 
     }

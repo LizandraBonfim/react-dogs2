@@ -1,6 +1,7 @@
 import { useState, useCallback, Dispatch, SetStateAction, useMemo } from "react";
 import api from "../services/api";
 import { AxiosResponse, AxiosRequestConfig } from "axios";
+import { getTokenFromLocalStorage } from "../Shared/Helpers";
 
 
 
@@ -26,7 +27,7 @@ function useApi<T>(): Result<T> {
 	const [erro, setErro] = useState<string | undefined>();
 
 	const tryCatchPattern = useCallback(
-		async (request: <T>(resource: string, config?: AxiosRequestConfig)
+		async (request: <T>(resource: string, config?: any, headers?: any)
 			=> Promise<AxiosResponse<T>>, resource, paramsData): Promise<AxiosResponse<T>> => {
 
 
@@ -35,8 +36,15 @@ function useApi<T>(): Result<T> {
 
 			try {
 
-				response = await request(resource, paramsData);
 				setLoading(true);
+
+				const token = getTokenFromLocalStorage();
+				
+				api.defaults.headers.common['Authorization'] = !!token ? `Bearer ${token}` : undefined;
+
+				response = await request(resource, paramsData);
+				setErro(undefined);
+
 				return await request(resource, paramsData);
 
 			} catch (error) {
@@ -45,10 +53,12 @@ function useApi<T>(): Result<T> {
 				// se for 404 remover o toke da local storage
 				// e redirecionar para login ou feed normal
 
-				console.log('error ssss', error);
+				console.log('errro ao tentar fazer a requisição', error);
+				console.dir(error)
+				const mensagem = error.response.data.mensagem;
 
-				debugger;
-				setErro(error);
+				setErro(mensagem);
+				//setErro(error);
 
 				return Promise.reject(null);
 
@@ -68,9 +78,8 @@ function useApi<T>(): Result<T> {
 		console.log('depois do get')
 		setData(data);
 
-		debugger;
 
-		console.log('data', data);
+		console.log('dados do data get', data);
 		console.log('statusText', statusText);
 
 
@@ -79,8 +88,6 @@ function useApi<T>(): Result<T> {
 	const post = useCallback(async (resource: string, params: any) => {
 
 		const { data, statusText } = await tryCatchPattern(api.post, resource, params);
-
-		debugger;
 
 		console.log('data', data);
 		console.log('statusText', statusText);

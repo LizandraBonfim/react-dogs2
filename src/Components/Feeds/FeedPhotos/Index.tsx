@@ -11,7 +11,6 @@ interface FeedPhotosProps {
 
 const FeedPhotos: React.FC<FeedPhotosProps> = ({ usuario }) => {
 
-  console.log('lista de usuarios', usuario);
   
 
 

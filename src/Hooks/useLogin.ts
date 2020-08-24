@@ -87,7 +87,6 @@ function useLogin(): Response {
   useEffect(() => {
     if (!sucesso) return;
 
-    console.log("resultado login", data);
     storageTokenLocal(data?.tokenDeAcesso);
     setUsuario(data?.usuario);
     storeUser(data?.usuario);

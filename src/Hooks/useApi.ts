@@ -25,6 +25,7 @@ function useApi<T>(): Result<T> {
 	const [data, setData] = useState<T>({} as any);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [erro, setErro] = useState<string | undefined>();
+	const [sucess, setSucess] = useState<boolean>(true);
 
 	const tryCatchPattern = useCallback(
 		async (request: <T>(resource: string, config?: any, headers?: any)
@@ -44,6 +45,8 @@ function useApi<T>(): Result<T> {
 
 				response = await request(resource, paramsData);
 				setErro(undefined);
+				console.log('sucesso', response.data);
+				
 
 				return await request(resource, paramsData);
 
@@ -53,8 +56,6 @@ function useApi<T>(): Result<T> {
 				// se for 404 remover o toke da local storage
 				// e redirecionar para login ou feed normal
 
-				console.log('errro ao tentar fazer a requisição', error);
-				console.dir(error)
 				const mensagem = error.response.data.mensagem;
 
 				setErro(mensagem);
@@ -72,15 +73,11 @@ function useApi<T>(): Result<T> {
 
 	const get = useCallback(async (resource: string, paramsData: any) => {
 
-		console.log('antes do get')
 		const { data, statusText } = await tryCatchPattern(api.get, resource, paramsData);
 		//const { data, statusText } = await tryCatchPattern(api.get<T>(resource, paramsData));
-		console.log('depois do get')
 		setData(data);
 
 
-		console.log('dados do data get', data);
-		console.log('statusText', statusText);
 
 
 	}, [tryCatchPattern]);
@@ -89,8 +86,6 @@ function useApi<T>(): Result<T> {
 
 		const { data, statusText } = await tryCatchPattern(api.post, resource, params);
 
-		console.log('data', data);
-		console.log('statusText', statusText);
 
 		setData(data);
 

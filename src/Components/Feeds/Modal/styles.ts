@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: flex;
-  width: 100vh;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
   top: 0px;
   left: 0px;
   background: rgba(0, 0, 0, 0.4);

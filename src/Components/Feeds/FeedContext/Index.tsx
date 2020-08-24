@@ -3,15 +3,14 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from "react";
+import { Foto } from "../../../models/Index";
 
-interface Photo {
-  id: string;
-}
 
 interface ModalFeedContextData {
-  photoModal: Photo | undefined;
-  setPhotoModal: Dispatch<SetStateAction<Photo | undefined>>;
+  photoModal: Foto | undefined;
+  setPhotoModal: Dispatch<SetStateAction<Foto | undefined>>;
   userModalId: string | undefined;
   setUserModalId: Dispatch<SetStateAction<string>>
 
@@ -22,11 +21,9 @@ export const ModalFeedContext = createContext<ModalFeedContextData>(
 );
 
 export const ModalFeedPhoto: React.FC = ({ children }) => {
-  
-  const [photoModal, setPhotoModal] = useState<Photo | undefined>();
-  const [userModalId, setUserModalId] = useState<string>("");
 
-  
+  const [photoModal, setPhotoModal] = useState<Foto | undefined>();
+  const [userModalId, setUserModalId] = useState<string>("");
 
   return (
     <ModalFeedContext.Provider

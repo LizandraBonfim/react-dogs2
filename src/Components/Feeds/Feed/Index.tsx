@@ -6,6 +6,7 @@ import { Usuario } from "../../../models/Index";
 import { UserContext } from "../../UserContext/Index";
 import useFeed from "../../../Hooks/useFeed";
 import FeedPhotos from "../FeedPhotos/Index";
+import Modal from "../Modal/Index";
 
 
 
@@ -15,7 +16,7 @@ interface FeedProps {
 
 const Feed: React.FC<FeedProps> = ({ usuarioId }) => {
 
-  
+
 
   const { photoModal, setUserModalId } = useContext(ModalFeedContext);
   const [openModal, setOpenModal] = useState(false);
@@ -26,16 +27,16 @@ const Feed: React.FC<FeedProps> = ({ usuarioId }) => {
   // Quando a foto for atribuida, a modal deve ser aberta
   useEffect(() => {
 
+    console.log('modal', photoModal)
     if (photoModal) setOpenModal(true);
     else setOpenModal(false);
 
   }, [photoModal]);
-
+  
   useEffect(() => {
 
     async function listarFeeds() {
 
-      console.log('buscando feed', usuarioId)
       await buscarFeed(undefined);
 
     }
@@ -49,16 +50,16 @@ const Feed: React.FC<FeedProps> = ({ usuarioId }) => {
 
   return (
     <Container>
-      <ModalFeedPhoto>
-        {openModal && <p>Modal foi aberta</p>}
 
-        {feeds && feeds.map((usuario, index) => (
+      {openModal &&  <Modal  /> }
 
-          <FeedPhotos key={index} usuario={usuario} />
+      {feeds && feeds.map((usuario, index) => (
 
-        ))}
-        
-      </ModalFeedPhoto>
+        <FeedPhotos key={index} usuario={usuario} />
+
+      ))}
+
+
     </Container>
   );
 };

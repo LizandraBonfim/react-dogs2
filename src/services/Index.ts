@@ -32,8 +32,6 @@ export async function efetuarLogin(login: Login): Promise<LoginResponse | undefi
 
         const mensagem = 'Ocorreu um erro ao tentar efetuar o login';
         //TODO: logar no sistema de log
-        console.log('erro', mensagem);
-        console.log('erro', erro);
         return undefined;
 
     }

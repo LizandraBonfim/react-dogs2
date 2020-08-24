@@ -19,8 +19,6 @@ const Image: React.FC<ImagePros> = ({ name, src, ...props }) => {
         target.style.opacity = 1;
     }
 
-    console.log('Container', Container.styledComponentId);
-    console.log('skeleton', Skeleton.styledComponentId);
 
 
     return <Container>

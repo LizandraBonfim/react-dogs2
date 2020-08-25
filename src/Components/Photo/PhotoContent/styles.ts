@@ -44,18 +44,45 @@ const SinglePhotoContainer = styled(PhotoContainer)`
 `;
 
 
-const Details = styled.div``;
+const Details = styled.div`
 
-const Author= styled.p``;
+    padding: 2rem 2rem 0 2rem;
+
+`;
+
+const Author = styled.p`
+
+    & a:hover {
+        text-decoration: underline;
+    }
+
+`;
 
 const Attributes = styled.ul``;
 
+const Views = styled.p`
 
-export { 
-    PhotoContainer, 
-    SinglePhotoContainer, 
-    Img, 
-    Details, 
-    Author, 
-    Attributes 
+    &::before {
+
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 10px;
+        margin-right: 0.5rem;
+        background: url('../../../Assets/visualizacao-black.svg');
+    }
+
+`;
+
+
+
+
+export {
+    PhotoContainer,
+    SinglePhotoContainer,
+    Img,
+    Details,
+    Views,
+    Author,
+    Attributes
 }

@@ -86,7 +86,7 @@ const MainContainer = styled(Container)`
   margin-top: 2rem;
 `;
 
-const Titulo = styled.h1`
+const Title = styled.h1`
     font-family: var(--type-second);
     line-height: 1;
     font-size: 3rem;
@@ -125,7 +125,7 @@ export {
     Container, 
     MainContainer, 
     Carregando,
-    Titulo,
+    Title as Titulo,
     AppDogs,
     AppBody
 };

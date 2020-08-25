@@ -13,6 +13,7 @@ export interface Foto {
     comentarios: Comentario[];
     extencao:    string;
     src:         string;
+    autor:       string;
 }
 
 export interface Usuario {

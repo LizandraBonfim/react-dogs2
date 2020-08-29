@@ -20,6 +20,7 @@ const FeedPhotoItem: React.FC<FeedPhotoItemProps> = ({ photo }) => {
   function handleClick() {
     setPhotoModal(photo);
   }
+  
 
   return (
     <Container onClick={handleClick} >

@@ -12,30 +12,6 @@ const Modal: React.FC = () => {
 
     const { setPhotoModal, photoModal } = useContext(ModalFeedContext);
 
-    const { comments, erro, listCommentsThePhoto, loading, mensagem } = useComments();
-
-    useEffect(() => {
-
-
-        async function loadComments() {
-
-            if (!photoModal?.id)
-                return;
-
-            await listCommentsThePhoto(photoModal.id);
-
-            console.log('modal aberta', photoModal);
-        }
-
-        loadComments();
-
-
-    }, []);
-
-
-
-
-
     function handleOutsideClick(event: MouseEvent<HTMLDivElement, globalThis.MouseEvent> | undefined) {
 
         if (event?.target === event?.currentTarget) {
@@ -46,10 +22,8 @@ const Modal: React.FC = () => {
 
 
     return (
-        <Container onClick={handleOutsideClick}>
-            { erro && <Error error={erro}  />}   
-            { loading && <Loading  /> }         
-            { (photoModal)  && <PhotoContent photo={photoModal} single={true}  /> }
+        <Container onClick={handleOutsideClick}>            
+            { (photoModal)  && <PhotoContent photo={photoModal} single={false}  /> }
             
         </Container>
     )

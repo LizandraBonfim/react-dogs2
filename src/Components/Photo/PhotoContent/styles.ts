@@ -35,7 +35,7 @@ const SinglePhotoContainer = styled(PhotoContainer)`
     grid-template-columns: 1fr;
     height: auto;
 
-    & > ${Img} {
+    & ${Img} {
         grid-row: 1;
         border-radius: 0.4rem;
         overflow: hidden;        
@@ -60,7 +60,7 @@ const Author = styled.p`
 
 const Attributes = styled.ul``;
 
-const Views = styled.p`
+const Views = styled.span`
 
     &::before {
 

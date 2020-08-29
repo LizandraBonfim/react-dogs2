@@ -37,7 +37,7 @@ const Feed: React.FC<FeedProps> = ({ usuarioId }) => {
 
     async function listarFeeds() {
 
-      await buscarFeed(undefined);
+      await buscarFeed(undefined);      
 
     }
 
@@ -45,6 +45,10 @@ const Feed: React.FC<FeedProps> = ({ usuarioId }) => {
 
 
   }, [usuarioId, buscarFeed]);
+
+
+  
+
 
   if (erro) return null;
 

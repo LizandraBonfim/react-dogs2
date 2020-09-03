@@ -3,6 +3,7 @@ import {useLocation} from 'react-router-dom';
 
 import {Container} from './styles';
 import {Titulo} from "../../../global";
+import UserHeaderNav from "../UserHeaderNav/Index";
 
 const UserHeader: React.FC = () => {
 
@@ -25,6 +26,7 @@ const UserHeader: React.FC = () => {
   return (
     <Container>
       <Titulo>{title}</Titulo>
+      <UserHeaderNav />
     </Container>
   )
 }

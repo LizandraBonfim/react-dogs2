@@ -2,11 +2,11 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { ResponseBase, Comentario, ResponseApi } from '../models/Index';
 import useApi from './useApi';
 
-interface Response extends ResponseBase {
 
+
+interface Response extends ResponseBase {
     comments: Comentario[];
     listCommentsThePhoto: (photoId: string) => Promise<any>;
-
 }
 
 function useComments(): Response {
@@ -14,8 +14,7 @@ function useComments(): Response {
     const { data, erro, loading, get } = useApi<ResponseApi<Comentario[]>>();
 
     const [message, setMessage] = useState<string>('');
-    const [comments, setComments] = useState<Comentario[]>([]);
-    //const [success, setSuccess] = useState<boolean>(true);
+
 
     useEffect(() => {
 
@@ -26,7 +25,7 @@ function useComments(): Response {
 
 
     }, [erro]);
-    
+
 
 
     const listCommentsThePhoto = useCallback(async (photoId: string): Promise<any> => {
@@ -43,7 +42,7 @@ function useComments(): Response {
         loading,
         sucesso: true,
         listCommentsThePhoto,
-        comments: data.dados
+        comments: data.dados,
 
     }
 

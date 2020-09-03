@@ -11,8 +11,6 @@ interface FeedPhotosProps {
 
 const FeedPhotos: React.FC<FeedPhotosProps> = ({ usuario }) => {
 
-  
-
 
   if (!usuario) return null;
 

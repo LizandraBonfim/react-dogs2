@@ -32,9 +32,11 @@ const validators: ValidatorType =
 };
 
 
+type typeInput = 'nome' | 'email' | 'number' | 'login' | 'senha' | undefined;
+
 interface Response {
 
-  value: string | number | Date | undefined;
+  value: any;
   erro: string | undefined;
   isValid: () => boolean;
   onBlur: () => boolean;
@@ -43,7 +45,7 @@ interface Response {
 }
 
 
-const useForms = (type: string | undefined = undefined): Response => {
+const useForms = (type: typeInput = undefined ): Response => {
 
   const [value, setValue] = useState<string | number | Date | undefined>("")
   const [erro, setError] = useState<string | undefined>();
@@ -56,6 +58,8 @@ const useForms = (type: string | undefined = undefined): Response => {
 
   function isValid(value: any): boolean {
 
+    console.log('valor', value)
+
     // Most not apply validation
     if (type === undefined) return true;
 
@@ -65,20 +69,18 @@ const useForms = (type: string | undefined = undefined): Response => {
     }
 
     if (validationExist(type) && didNotPassTheRegex(type, value)) {
+
       setError(validators[type].message);
       return false;
     }
 
-
     setError(undefined);
     return true;
-
-
 
   }
 
 
-  function onChange({ target }: ChangeEvent<HTMLInputElement>): void {    
+  function onChange({ target }: ChangeEvent<HTMLInputElement>): void {
 
     if (erro)
       isValid(target.value)

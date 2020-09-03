@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import {
   PhotoContainer,
@@ -15,8 +15,7 @@ import Image from '../../../Shared/Image/Index';
 import { Link } from 'react-router-dom';
 import { Titulo } from '../../../global';
 import PhotoComments from '../PhotoComments/Index';
-import useComments from '../../../Hooks/useComments';
-import Loading from '../../../Shared/Loading/Index';
+
 
 interface PhotoContentPropos {
   photo: Foto,
@@ -27,22 +26,7 @@ interface PhotoContentPropos {
 
 const PhotoContent: React.FC<PhotoContentPropos> = ({ photo, single }) => {
 
-  const Container = single === true ? SinglePhotoContainer : PhotoContainer;
-
-  const { comments, erro, loading, listCommentsThePhoto } = useComments();
-
-  useEffect(() => {
-
-    async function loadComments() {      
-
-      await listCommentsThePhoto(photo.id);
-
-    }
-
-    loadComments();
-
-  }, [listCommentsThePhoto, photo]);
-
+  const Container = single ? SinglePhotoContainer : PhotoContainer;
 
 
   return (
@@ -63,16 +47,16 @@ const PhotoContent: React.FC<PhotoContentPropos> = ({ photo, single }) => {
           </Titulo>
 
           <Attributes>
-            <li>{photo.peso}</li>
-            <li>{photo.idade}</li>
+            <li>{photo.peso} Kg</li>
+            <li>{photo.idade} Anos</li>
           </Attributes>
 
         </div>
 
-        {loading && <Loading />}
-        {comments && <PhotoComments commentsPhoto={comments} single={true} /> }
 
-        
+        <PhotoComments photoId={photo.id} single={true} />
+
+
 
       </Details>
 

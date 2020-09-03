@@ -9,26 +9,26 @@ import { UserContext } from "../UserContext/Index";
 
 const Header: React.FC = () => {
 
-  const { usuario } = useContext(UserContext);  
-  
+  const { user } = useContext(UserContext);
+
 
   return (
     <Root>
-      <Container>        
-        <nav>          
+      <Container>
+        <nav>
           <Link to="/" aria-label="Dogs - Home">
             <Dogs />
           </Link>
-          
-          {!!!usuario && (
+
+          {!!!user && (
             <Link className="login" to="/login">
               Login / Criar
             </Link>
           )}
 
-          {usuario && (
+          {user && (
             <Link className="login" to="/conta">
-              {usuario.nomeDeUsuario}
+              {user.nomeDeUsuario}
             </Link>
           )}
         </nav>

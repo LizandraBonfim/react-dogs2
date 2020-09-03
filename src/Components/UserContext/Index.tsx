@@ -9,35 +9,37 @@ import useFeed from '../../Hooks/useFeed';
 
 
 interface UsuarioContextData {
-    usuario: Usuario | undefined;
+    user: Usuario | undefined;
     setUsuario: Dispatch<SetStateAction<Usuario | undefined>>;
+    logout: () => void;
 }
 
 export const UserContext = createContext<UsuarioContextData>({} as UsuarioContextData);
 
 export const UserStorage: React.FC = ({ children }) => {
 
-    const [usuario, setUsuario] = useState<Usuario | undefined>();   
+    const [user, setUser] = useState<Usuario | undefined>();
     const navigate = useNavigate();
     const { verifyAuth, isAuthenticate } = useLogin();
+
 
     useEffect(() => {
 
         async function verifyUser() {
 
             const usuarioId = getUserIdByToken();
-            if (!!!usuarioId)
+            if (!usuarioId)
                 return;
 
             await verifyAuth();
 
             const user = getUserStored();
-            setUsuario(user);
+            setUser(user);
             navigate('/');
 
         }
 
-        verifyUser();
+        const promise = verifyUser();
 
 
     }, [navigate, verifyAuth]);
@@ -46,12 +48,12 @@ export const UserStorage: React.FC = ({ children }) => {
     function logout() {
 
         removeItemsLocalStorage();
-        setUsuario(undefined);
+        setUser(undefined);
     }
 
 
     useEffect(() => {
-        
+
         if (!isAuthenticate)
             logout();
 
@@ -59,8 +61,9 @@ export const UserStorage: React.FC = ({ children }) => {
 
     return (
         <UserContext.Provider value={{
-            usuario,
-            setUsuario
+            user: user,
+            setUsuario: setUser,
+            logout
         }}>
             {children}
         </UserContext.Provider>

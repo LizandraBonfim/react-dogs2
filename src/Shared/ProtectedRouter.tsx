@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 import { UserContext } from '../Components/UserContext/Index';
 
 const ProtectedRouter = (props: any): React.ReactElement | null => {
-    const { usuario } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
-    if (usuario) return <Route {...props} />;
+    if (user) return <Route {...props} />;
 
-    return null;
+    return <Navigate to="/login"/>
 };
 
 export default ProtectedRouter;

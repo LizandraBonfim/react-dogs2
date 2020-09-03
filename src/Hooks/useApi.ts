@@ -6,14 +6,12 @@ import { getTokenFromLocalStorage } from "../Shared/Helpers";
 
 
 interface Result<T> {
-	erro: string | undefined,
+  sucess: boolean;
+	erro: string | undefined;
 	setErro: Dispatch<SetStateAction<string | undefined>>;
-
 	loading: boolean,
 	setLoading: Dispatch<SetStateAction<boolean>>;
-
 	data: T,
-
 	get: (resource: string, paramsData: any) => Promise<void>;
 	post: (resource: string, params: any) => Promise<void>;
 
@@ -25,28 +23,27 @@ function useApi<T>(): Result<T> {
 	const [data, setData] = useState<T>({} as any);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [erro, setErro] = useState<string | undefined>();
-	const [sucess, setSucess] = useState<boolean>(true);
+	const [sucess, setSucess] = useState<boolean>(false);
 
 	const tryCatchPattern = useCallback(
 		async (request: <T>(resource: string, config?: any, headers?: any)
 			=> Promise<AxiosResponse<T>>, resource, paramsData): Promise<AxiosResponse<T>> => {
 
-
 			let response: AxiosResponse<T>;
-
 
 			try {
 
 				setLoading(true);
 
 				const token = getTokenFromLocalStorage();
-				
+
 				api.defaults.headers.common['Authorization'] = !!token ? `Bearer ${token}` : undefined;
 
 				response = await request(resource, paramsData);
 				setErro(undefined);
+				setSucess(true);
 				console.log('sucesso', response.data);
-				
+
 
 				return await request(resource, paramsData);
 
@@ -59,7 +56,7 @@ function useApi<T>(): Result<T> {
 				const mensagem = error.response.data.mensagem;
 
 				setErro(mensagem);
-				//setErro(error);
+				setSucess(false);
 
 				return Promise.reject(null);
 
@@ -84,18 +81,17 @@ function useApi<T>(): Result<T> {
 
 	const post = useCallback(async (resource: string, params: any) => {
 
+	  console.log('fiz um post');
+
 		const { data, statusText } = await tryCatchPattern(api.post, resource, params);
-
-
 		setData(data);
-
-
 
 	}, [tryCatchPattern]);
 
 
 
 	return {
+	  sucess,
 		data,
 		loading,
 		setLoading,

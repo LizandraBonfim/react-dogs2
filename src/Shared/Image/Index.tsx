@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, ImgHTMLAttributes, HTMLAttributes } from 'react';
+import React from 'react';
 
 import { Container, Img, Skeleton } from './styles';
 import Constants from '../Constants';
@@ -21,10 +21,10 @@ const Image: React.FC<ImagePros> = ({ name, src, ...props }) => {
 
     return (
         <Container>
-            <Skeleton></Skeleton>
+            <Skeleton/>
             <Img src={fullSrc} onLoad={handleLoad} alt={name} {...props} />
         </Container>
     );
 }
 
-export default Image;  
+export default Image;

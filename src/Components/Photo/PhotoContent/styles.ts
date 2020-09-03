@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 const ScaleUp = keyframes`
 
@@ -9,8 +9,12 @@ const ScaleUp = keyframes`
 
 `;
 
+
 const Img = styled.div`
     grid-row: 1/4;
+    @media (max-width: 65rem) {
+      grid-row: 1;
+    }
 `;
 
 
@@ -28,6 +32,16 @@ const PhotoContainer = styled.div`
     transform: scale(0.8);
     animation: ${ScaleUp} 0.3s forwards;
 
+
+    @media (max-width: 65rem) {
+
+      height: auto;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+      grid-template-columns: minmax(20rem, 40rem);
+
+    }
+
 `;
 
 const SinglePhotoContainer = styled(PhotoContainer)`
@@ -35,10 +49,10 @@ const SinglePhotoContainer = styled(PhotoContainer)`
     grid-template-columns: 1fr;
     height: auto;
 
-    & ${Img} {
+    ${Img} {
         grid-row: 1;
         border-radius: 0.4rem;
-        overflow: hidden;        
+        overflow: hidden;
     }
 
 `;
@@ -58,7 +72,32 @@ const Author = styled.p`
 
 `;
 
-const Attributes = styled.ul``;
+const Attributes = styled.ul`
+
+  display: flex;
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  li {
+    margin-right: 2rem;
+
+    ::before {
+      content: '';
+      display: inline-block;
+      height: 20px;
+      margin-right: 0.5rem;
+      position: relative;
+      top: 3px;
+      width: 2px;
+      background: #333;
+      margin-top: 5px;
+
+    }
+  }
+
+`;
 
 const Views = styled.span`
 

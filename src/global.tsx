@@ -1,7 +1,7 @@
 // @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@700&display=swap');
-import styled, { createGlobalStyle, keyframes } from "styled-components";
+import styled, {createGlobalStyle, css, keyframes} from "styled-components";
 
-const EstiloGlobal = createGlobalStyle`    
+const EstiloGlobal = createGlobalStyle`
 
     *{
         box-sizing: border-box;
@@ -53,6 +53,13 @@ const animeLeftFrame = keyframes`
         opacity: 1;
         transform: initial;
     }
+`;
+
+const AnimeLeftStyle = css`
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: ${animeLeftFrame} 0.3s forwards;
+
 `;
 
 const AnimeLeft = styled.div`
@@ -119,13 +126,14 @@ const AppBody = styled.main`
     flex: 1;
 `;
 
-export { 
-    EstiloGlobal, 
-    AnimeLeft, 
-    Container, 
-    MainContainer, 
+export {
+    EstiloGlobal,
+    AnimeLeft,
+    Container,
+    MainContainer,
     Carregando,
     Title as Titulo,
     AppDogs,
-    AppBody
+    AppBody,
+    AnimeLeftStyle
 };

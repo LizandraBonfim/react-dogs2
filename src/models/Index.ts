@@ -40,3 +40,9 @@ export interface ResponseBase {
 
 }
 
+export interface Stats {
+  fotoId: string;
+  nome: string;
+  qtdAcessos: number;
+}
+

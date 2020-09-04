@@ -10,6 +10,7 @@ import Login from "./Components/Login/Index";
 import ProtectedRouter from "./Shared/ProtectedRouter";
 import User from "./Components/User/User";
 import Photo from "./Components/Photo/Index";
+import UserProfile from "./Components/User/UserProfile/Index";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
               <Route path="/login/*" element={<Login />} />
               <ProtectedRouter path="conta/*" element={ <User /> } />
               <Route path="foto/:id" element={<Photo />} />
+              <Route path="perfil/:user" element={ <UserProfile /> } />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AppBody>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {
   PhotoContainer,
@@ -15,6 +15,8 @@ import Image from '../../../Shared/Image/Index';
 import { Link } from 'react-router-dom';
 import { Titulo } from '../../../global';
 import PhotoComments from '../PhotoComments/Index';
+import usePhoto from "../../../Hooks/usePhoto";
+
 
 
 interface PhotoContentPropos {
@@ -26,8 +28,21 @@ interface PhotoContentPropos {
 
 const PhotoContent: React.FC<PhotoContentPropos> = ({ photo, single }) => {
 
+  const { addQtyAccess } = usePhoto();
+
   const Container = single ? SinglePhotoContainer : PhotoContainer;
 
+  useEffect(() => {
+
+    async function addQty() {
+
+      await addQtyAccess(photo.id);
+
+    }
+
+    const promisse = addQty();
+
+  }, [])
 
   return (
     <Container>
@@ -53,10 +68,7 @@ const PhotoContent: React.FC<PhotoContentPropos> = ({ photo, single }) => {
 
         </div>
 
-
         <PhotoComments photoId={photo.id} single={true} />
-
-
 
       </Details>
 

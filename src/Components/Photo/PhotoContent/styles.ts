@@ -66,6 +66,12 @@ const Details = styled.div`
 
 const Author = styled.p`
 
+    opacity: 0.5;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     & a:hover {
         text-decoration: underline;
     }
@@ -101,8 +107,7 @@ const Attributes = styled.ul`
 
 const Views = styled.span`
 
-    &::before {
-
+    ::before {
         content: '';
         display: inline-block;
         width: 16px;

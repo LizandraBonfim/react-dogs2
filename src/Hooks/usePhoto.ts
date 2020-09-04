@@ -5,6 +5,7 @@ import {useCallback} from "react";
 interface Response extends ResponseBase {
   sendNewPhoto: (command: FormData) => Promise<void>;
   getPhoto: (photoId: string) => Promise<void>;
+  addQtyAccess: (photoId: string) => Promise<void>;
   photo: Foto
 }
 
@@ -25,6 +26,16 @@ const usePhoto = (): Response => {
 
   }, [get]);
 
+  const addQtyAccess = useCallback(async (photoId: string): Promise<void> => {
+
+    console.log('photoId', photoId)
+
+    return await post('foto/incrementar-acesso', {
+      id: photoId
+    });
+
+  }, [post])
+
 
   return {
     sucesso: sucess,
@@ -32,7 +43,8 @@ const usePhoto = (): Response => {
     erro,
     sendNewPhoto,
     getPhoto,
-    photo: data.dados
+    photo: data.dados,
+    addQtyAccess
   }
 
 }

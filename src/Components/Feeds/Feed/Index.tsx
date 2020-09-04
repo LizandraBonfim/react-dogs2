@@ -9,14 +9,18 @@ import Modal from "../Modal/Index";
 
 
 interface FeedProps {
-  usuarioId?: string;
+  userId?: string;
+  userName?: string;
 }
 
-const Feed: React.FC<FeedProps> = ({ usuarioId }) => {
+const Feed: React.FC<FeedProps> = ({ userId, userName }) => {
 
   const { photoModal, setUserModalId } = useContext(ModalFeedContext);
   const [openModal, setOpenModal] = useState(false);
-  const { buscarFeed, loading, erro, feeds, mensagem, sucesso } = useFeed(usuarioId);
+  const { buscarFeed, loading, erro, feeds, mensagem, sucesso } = useFeed({
+    userId,
+    userName
+  });
 
 
   // Quando a foto for atribuida, a modal deve ser aberta
@@ -39,7 +43,7 @@ const Feed: React.FC<FeedProps> = ({ usuarioId }) => {
     const promise = listarFeeds();
 
 
-  }, [usuarioId, buscarFeed]);
+  }, [userId, buscarFeed]);
 
 
   if (erro) return null;

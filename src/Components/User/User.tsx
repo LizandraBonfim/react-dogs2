@@ -20,7 +20,7 @@ const User: React.FC = () => {
       <Head title="Minha conta" description="Painel contendo minhas informações"/>
       <UserHeader/>
       <Routes>
-        <Route path="/" element={<Feed usuarioId={ user?.id } />}/>
+        <Route path="/" element={<Feed userId={ user?.id } />}/>
         <Route path="postar" element={<UserPhotoPost /> }  />
         <Route path="*" element={<NotFound />} />
       </Routes>
